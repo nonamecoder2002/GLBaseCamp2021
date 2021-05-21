@@ -1,8 +1,7 @@
 ---
 - hosts: all
   remote_user: root
-  tasks:
-    
+  tasks: 
     - name: Installing pwquality module
       apt:
         name: libpam-pwquality

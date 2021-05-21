@@ -2,7 +2,6 @@
 - hosts: all
   remote_user: root
   tasks:
-
     - name: Hardening the sshd
       lineinfile:
         path: /etc/hosts.deny
