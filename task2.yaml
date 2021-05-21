@@ -6,4 +6,4 @@
     - name: Hardening the sshd
       lineinfile:
         path: /etc/hosts.deny
-        line: 'sshd: ALL EXCEPT LOCAL, <Main host IPv4>'
+        line: 'sshd: ALL EXCEPT LOCAL, <__Main_host_IPv4__>'

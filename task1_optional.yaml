@@ -2,20 +2,19 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name: Preparing to install pwquality module
-      apt:
-        update_cache: yes
-  
+    
     - name: Installing pwquality module
       apt:
         name: libpam-pwquality
+        update_cache: yes
 
     - name: Configuring pwquality module
       lineinfile: 
         path: /etc/security/pwquality.conf
+        regexp: "{{ item.pattern }}"
+        line: "{{ item.data }}"
         state: present
-        line: "{{item}}"
-      with_items:
-      - 'usercheck=1'
-      - 'enforce_for_root'
-      - 'retry=3'
+      loop:
+        - {pattern: 'usercheck', data: 'usercheck=1' }
+        - {pattern: 'enforce_for_root', data: 'enforce_for_root' }
+        - {pattern: 'retry', data: 'retry=3' }

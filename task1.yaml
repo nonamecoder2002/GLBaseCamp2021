@@ -2,13 +2,11 @@
 - hosts: all
   remote_user: root
   tasks:
-    - name: Preparing to install pwquality module
-      apt:
-        update_cache: yes
   
     - name: Installing pwquality module
       apt:
         name: libpam-pwquality
+        update_cache: yes
       
     - name: Configuring pwquality module
       pamd:
