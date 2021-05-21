@@ -1,12 +1,10 @@
 ---
 - hosts: all
-  connection: local
-  become: root
+  remote_user: root
   tasks:
     - name: Preparing to install pwquality module
       apt:
         update_cache: yes
-        upgrade: full
   
     - name: Installing pwquality module
       apt:
