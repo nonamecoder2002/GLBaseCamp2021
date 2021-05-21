@@ -1,0 +1,23 @@
+---
+- hosts: all
+  connection: local
+  become: root
+  tasks:
+    - name: Preparing to install pwquality module
+      apt:
+        update_cache: yes
+        upgrade: full
+  
+    - name: Installing pwquality module
+      apt:
+        name: libpam-pwquality
+
+    - name: Configuring pwquality module
+      lineinfile: 
+        path: /etc/security/pwquality.conf
+        state: present
+        line: "{{item}}"
+      with_items:
+      - 'usercheck=1'
+      - 'enforce_for_root'
+      - 'retry=3'
