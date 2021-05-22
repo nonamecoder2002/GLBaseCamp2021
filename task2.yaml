@@ -5,4 +5,4 @@
     - name: Hardening the sshd
       lineinfile:
         path: /etc/hosts.deny
-        line: 'sshd: ALL EXCEPT LOCAL, <__Main_host_IPv4__>'
+        line: "sshd: ALL EXCEPT LOCAL, {{ ansible_env['SSH_CLIENT'].split()[0] }}"
