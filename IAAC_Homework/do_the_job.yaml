@@ -1,0 +1,12 @@
+---
+- hosts: iaas
+  connection: local
+  become: root
+  roles:
+    - touch_config
+
+- hosts: all
+  connection: local
+  become: root
+  roles:
+    - fetch_data

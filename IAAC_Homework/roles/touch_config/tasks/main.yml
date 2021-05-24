@@ -1,0 +1,9 @@
+---
+- name: Create file in /etc
+  file: 
+    path: /etc/iaas
+    mode: '0500'
+
+- name: Print out message 
+  debug:
+    msg: File created & configured!

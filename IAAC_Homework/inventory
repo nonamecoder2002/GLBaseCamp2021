@@ -1,0 +1,15 @@
+[group1]
+127.0.0.1
+
+[group2]
+127.0.0.2
+
+[group3]
+127.0.0.3
+
+[group4]
+127.0.0.4
+
+[iaas:children]
+group1
+group2

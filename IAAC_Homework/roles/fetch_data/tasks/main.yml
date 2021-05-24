@@ -1,0 +1,9 @@
+---
+- name: Fetch distro info
+  shell: cat /etc/os-release
+  register: os_info
+  ignore_errors: True
+
+- name: Print info
+  debug:
+    msg: "{{ansible_hostname}}{{os_info.stdout_lines[:2]}}"
