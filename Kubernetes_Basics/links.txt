@@ -1,0 +1,4 @@
+
+task1 --> add network to runc container: "https://asciinema.org/a/417092" 
+
+task2 --> docker img: "docker pull alex1master/glbasecamp:nc_server"
