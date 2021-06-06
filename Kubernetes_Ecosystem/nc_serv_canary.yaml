@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ncserv-canary
+  labels:
+    app: ncserv
+    version: "2.0.0"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ncserv
+  template:
+    metadata:
+      labels:
+        app: ncserv
+        version: "2.0.0"
+    spec:
+      containers:
+      - name: ncserv
+        image: gcr.io/second-terra-315309/nc_serv:2.0.0
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ncserv-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: ncserv
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
