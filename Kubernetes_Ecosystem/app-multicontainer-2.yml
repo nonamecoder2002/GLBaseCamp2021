@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multiconapp-depl
+  labels:
+    app: multiconapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multiconapp
+  template:
+    metadata:
+      labels:
+        app: multiconapp
+    spec:
+      volumes:
+      - name: html
+        emptyDir: {}
+      containers:
+      - name: 1st
+        image: nginx
+        volumeMounts:
+        - name: html
+          mountPath: /usr/share/nginx/html
+        ports:
+        - containerPort: 80
+      - name: 2nd
+        image: debian
+        volumeMounts:
+        - name: html
+          mountPath: /html
+        command: ["/bin/sh", "-c"]
+        args:
+          - while true; do
+              date >> /html/index.html;
+              sleep 1;
+            done
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multiconapp-service
+spec:
+  type: NodePort
+  selector:
+    app: multiconapp
+  ports:
+    - protocol: TCP
+      port: 80
+      nodePort: 30001
+  
